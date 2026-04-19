@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Collaboration - BM-SEVA</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Collaboration with Waste Management Companies</h1>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="biowaste.html">Log Biowaste</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="../auth-pages/login.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Certified Waste Management Companies</h2>
+      <p>Contact and collaborate with certified companies for efficient biowaste collection and disposal.</p>
+      <ul id="companiesList">
+        <!-- Companies will be listed here -->
+      </ul>
+    </section>
+  </main>
+  <script>
+    // For demo, static list of companies; in real app, fetch from backend API
+    const companies = [
+      { name: 'EcoWaste Solutions', contact: 'contact@ecowaste.com', phone: '123-456-7890' },
+      { name: 'GreenMed Disposal', contact: 'info@greenmed.com', phone: '987-654-3210' },
+      { name: 'SafeBio Waste Management', contact: 'support@safebio.com', phone: '555-123-4567' },
+    ];
+
+    const companiesList = document.getElementById('companiesList');
+    companies.forEach(company => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${company.name}</strong><br>Email: <a href="mailto:${company.contact}">${company.contact}</a><br>Phone: ${company.phone}`;
+      companiesList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

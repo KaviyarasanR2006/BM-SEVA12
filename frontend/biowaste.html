@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log Biowaste - BM-SEVA</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Log Biowaste Disposal</h1>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="collaboration.html">Collaboration</a></li>
+        <li><a href="../auth-pages/login.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <form id="biowasteForm">
+      <label for="wasteType">Waste Type:</label>
+      <input type="text" id="wasteType" name="wasteType" required />
+
+      <label for="quantityKg">Quantity (kg):</label>
+      <input type="number" id="quantityKg" name="quantityKg" step="0.01" required />
+
+      <label for="disposalDate">Disposal Date:</label>
+      <input type="date" id="disposalDate" name="disposalDate" required />
+
+      <label for="disposalMethod">Disposal Method:</label>
+      <input type="text" id="disposalMethod" name="disposalMethod" required />
+
+      <label for="notes">Notes:</label>
+      <textarea id="notes" name="notes"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+  <script>
+    document.getElementById('biowasteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const wasteType = document.getElementById('wasteType').value;
+      const quantityKg = parseFloat(document.getElementById('quantityKg').value);
+      const disposalDate = document.getElementById('disposalDate').value;
+      const disposalMethod = document.getElementById('disposalMethod').value;
+      const notes = document.getElementById('notes').value;
+
+      // For demo, using a fixed healthcareProvider id; in real app, get from auth context
+      const healthcareProvider = 'replace_with_actual_user_id';
+
+      const response = await fetch('http://localhost:5000/api/biowaste', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          healthcareProvider,
+          wasteType,
+          quantityKg,
+          disposalDate,
+          disposalMethod,
+          notes,
+        }),
+      });
+
+      if (response.ok) {
+        alert('Biowaste log submitted successfully');
+        document.getElementById('biowasteForm').reset();
+      } else {
+        const errorData = await response.json();
+        alert('Error: ' + errorData.message);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Waste Pickup Report</title>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("qEBlzdD5bJZvQdqUY"); // Replace with your EmailJS user ID
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    form div {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    function EmergencyWastePickupReport() {
+      const [location, setLocation] = useState(null);
+
+      const handleGetLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              setLocation({ latitude, longitude });
+            },
+            (error) => {
+              alert("Error fetching location: " + error.message);
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Append location data if available
+        if (location) {
+          const latInput = document.createElement("input");
+          latInput.type = "hidden";
+          latInput.name = "latitude";
+          latInput.value = location.latitude;
+
+          const lngInput = document.createElement("input");
+          lngInput.type = "hidden";
+          lngInput.name = "longitude";
+          lngInput.value = location.longitude;
+
+          e.target.appendChild(latInput);
+          e.target.appendChild(lngInput);
+        }
+
+        emailjs.sendForm("service_gsev889", "template_661no5q", e.target)
+          .then((result) => {
+              alert("Report submitted successfully!");
+              e.target.reset();
+              setLocation(null);
+          }, (error) => {
+              alert("Failed to send report: " + error.text);
+          });
+      };
+
+      return (
+        <div className="container">
+          <h1>Emergency Waste Pickup Report</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Name:</label>
+              <input type="text" name="user_name" placeholder="Enter your name" required />
+            </div>
+            <div>
+              <label>Contact Number:</label>
+              <input type="text" name="user_contact" placeholder="Enter your contact number" required />
+            </div>
+            <div>
+              <label>Emergency Description:</label>
+              <textarea name="description" placeholder="Describe the emergency" required></textarea>
+            </div>
+            <div>
+              <label>Address:</label>
+              <input type="text" name="address" placeholder="Enter location address" required />
+            </div>
+            <div>
+              <label>Location:</label>
+              <button type="button" onClick={handleGetLocation} style={{ marginBottom: '15px' }}>Get Current Location</button>
+              {location && (
+                <div>
+                  <p><strong>Latitude:</strong> {location.latitude}</p>
+                  <p><strong>Longitude:</strong> {location.longitude}</p>
+                </div>
+              )}
+            </div>
+            <button type="submit">Submit Report</button>
+          </form>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<EmergencyWastePickupReport />, document.getElementById("root"));
+  </script>
+  <!-- <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    function EmergencyWastePickupReport() {
+      const [location, setLocation] = useState(null);
+
+      const handleGetLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              setLocation({ latitude, longitude });
+            },
+            (error) => {
+              alert("Error fetching location: " + error.message);
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      };
+
+      return (
+        <div className="container">
+          <h1>Emergency Waste Pickup Report</h1>
+          <form>
+            <div>
+              <label>Name:</label>
+              <input type="text" placeholder="Enter your name" required />
+            </div>
+            <div>
+              <label>Contact Number:</label>
+              <input type="text" placeholder="Enter your contact number" required />
+            </div>
+            <div>
+              <label>Emergency Description:</label>
+              <textarea placeholder="Describe the emergency" required></textarea>
+            </div>
+            <div>
+              <label>Address:</label>
+              <input type="text" placeholder="Enter location address" required />
+            </div>
+            <div>
+              <label>Location:</label>
+              <button type="button" onClick={handleGetLocation} style={{ marginBottom: '15px' }}>Get Current Location</button>
+              {location && (
+                <div>
+                  <p><strong>Latitude:</strong> {location.latitude}</p>
+                  <p><strong>Longitude:</strong> {location.longitude}</p>
+                </div>
+              )}
+            </div>
+            <button type="submit">Submit Report</button>
+          </form>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<EmergencyWastePickupReport />, document.getElementById("root"));
+  </script>
+</body>
+</html> -->

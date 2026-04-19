@@ -1,0 +1,56 @@
+/* Responsive overrides for auth-pages */
+
+@media (max-width: 768px) {
+  .container {
+    width: 95% !important;
+    padding: 20px 15px !important;
+  }
+
+  .service-box {
+    width: 100% !important;
+    padding: 20px !important;
+  }
+
+  .tabs {
+    flex-direction: column !important;
+  }
+
+  .tabs div {
+    width: 100% !important;
+    padding: 15px 10px !important;
+  }
+
+  .home-box, .login-box {
+    width: 90% !important;
+    padding: 20px !important;
+  }
+
+  .navbar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .navbar a {
+    margin: 5px 0 !important;
+  }
+
+  .service-container {
+    padding: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-box, .login-box {
+    width: 100% !important;
+    padding: 15px !important;
+  }
+
+  .btn-login {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+
+  .service-box ul li {
+    font-size: 14px !important;
+  }
+}

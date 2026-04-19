@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biowaste Segregation Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #4CAF50;
+      --light-green: #e6f4ea;
+      --blue: #2196F3;
+      --red: #f44336;
+      --yellow: #FFEB3B;
+      --black: #333;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(to right, #4CAF50, #81C784);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    header h1 {
+      margin-bottom: 10px;
+      font-size: 3rem;
+    }
+    header p {
+      font-size: 1.2rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-bottom: 5px solid var(--green);
+    }
+    .card-content {
+      padding: 1.8rem;
+    }
+    .card-content h2 {
+      font-size: 1.6rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .card-content p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .card-content ul {
+      list-style: inside;
+      padding-left: 0;
+    }
+    .card-content ul li {
+      margin-bottom: 6px;
+    }
+
+    /* Color Bin Section */
+    .color-bin-section {
+      margin-top: 5rem;
+      background: var(--light-green);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+    }
+    .color-bin-section h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--green);
+      font-size: 2.2rem;
+    }
+    .bin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+    }
+    .bin {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .bin:hover {
+      background: #e0f2f1;
+      transform: translateY(-6px);
+    }
+    .bin img {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 1rem;
+    }
+    .bin span {
+      display: block;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .card img {
+        height: 200px;
+      }
+    }
+    /* Navbar styles from login.html */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: rgba(76, 175, 80, 0.9);
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    .navbar img {
+      height: 40px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      margin: 0 15px;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div><img src="../BM-SEVA LOGO 3.PNG" alt="BM-SEVA Logo" style="height:40px;"></div>
+    <div>
+      <a href="guiude.html">Home</a>
+      <a href="service.html">Services</a>
+      <a href="login.html">login</a>
+      <a href="request-status.html">Request Status</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+
+  <main>
+
+    <section class="card-grid">
+      <div class="card">
+        <img src="b2b1bb09-9f5f-4f3e-a731-1fe2d5e362c2 (1).png" alt="Biodegradable Waste">
+        <div class="card-content">
+          <h2>Biodegradable Waste</h2>
+          <p>Organic waste that decomposes naturally into the environment.</p>
+          <ul>
+            <li>Food leftovers</li>
+            <li>Vegetable peels</li>
+            <li>Garden leaves</li>
+            <li>Paper, wood</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="waste-image_-10_2018_572x387_Son-Nguyen.png" alt="Non-Biodegradable Waste">
+        <div class="card-content">
+          <h2>Non-Biodegradable Waste</h2>
+          <p>Waste that does not decompose easily and needs recycling.</p>
+          <ul>
+            <li>Plastics, Glass</li>
+            <li>Metals, Cans</li>
+            <li>Rubber products</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="hazgal5.png" alt="Hazardous Waste">
+        <div class="card-content">
+          <h2>Hazardous Waste</h2>
+          <p>Waste that is harmful to health and needs special handling.</p>
+          <ul>
+            <li>Batteries, Chemicals</li>
+            <li>Medical waste</li>
+            <li>Expired medicines</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="color-bin-section">
+      <h2>Color Bins Explained</h2>
+      <div class="bin-grid">
+
+        <div class="bin">
+          <img src="OIP (1).png" alt="Green Bin">
+          <span style="color:green;">Green Bin</span>
+          Biodegradable waste (Food, leaves, compost)
+        </div>
+
+        <div class="bin">
+          <img src="https://img.icons8.com/fluency/96/000000/recycle-bin.png" alt="Blue Bin">
+          <span style="color:blue;">Blue Bin</span>
+          Dry recyclable waste (Paper, plastics, metals)
+        </div>
+
+        <div class="bin">
+          <img src="https://img.icons8.com/fluency/96/000000/delete-forever.png" alt="Red Bin">
+          <span style="color:red;">Red Bin</span>
+          Sanitary waste (Diapers, napkins)
+        </div>
+
+        <div class="bin">
+          <img src="OIP.png" alt="Yellow Bin">
+          <span style="color:goldenrod;">Yellow Bin</span>
+          E-waste and chemical waste
+        </div>
+
+        <div class="bin">
+          <img src="https://img.icons8.com/ios-filled/100/000000/trash.png" alt="Black Bin">
+          <span style="color:black;">Black Bin</span>
+          Reject waste (Glass, ceramics, dust)
+        </div>
+
+      </div>
+    </section>
+
+    <div style="text-align:center; margin-top: 2rem;">
+      <button onclick="location.href='service.html'" style="background-color: var(--green); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: background-color 0.3s;">
+        Services
+      </button>
+    </div>
+
+  </main>
+
+</body>
+</html>

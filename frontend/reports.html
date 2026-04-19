@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reports - BM-SEVA</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Automated Reports</h1>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="biowaste.html">Log Biowaste</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="collaboration.html">Collaboration</a></li>
+        <li><a href="../auth-pages/login.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="reportsSection">
+      <h2>Your Reports</h2>
+      <ul id="reportsList"></ul>
+    </section>
+  </main>
+  <script>
+    async function fetchReports() {
+      // For demo, using a fixed healthcareProvider id; in real app, get from auth context
+      const healthcareProvider = 'replace_with_actual_user_id';
+
+      const response = await fetch(`http://localhost:5000/api/reports/${healthcareProvider}`);
+      if (response.ok) {
+        const reports = await response.json();
+        const reportsList = document.getElementById('reportsList');
+        reportsList.innerHTML = '';
+        reports.forEach(report => {
+          const li = document.createElement('li');
+          li.textContent = `${new Date(report.generatedAt).toLocaleDateString()} - ${report.reportType}`;
+          reportsList.appendChild(li);
+        });
+      } else {
+        alert('Failed to fetch reports');
+      }
+    }
+
+    fetchReports();
+  </script>
+</body>
+</html>

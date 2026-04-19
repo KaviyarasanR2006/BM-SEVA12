@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: white;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #45a049;
+        }
+
+        .contact-info {
+            padding: 40px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            color: #4CAF50;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .contact-info .address,
+        .contact-info .phone {
+            margin: 10px 0;
+        }
+
+        .map {
+            height: 300px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+     <script>
+        (function() {
+          emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual EmailJS public key
+        })();
+      </script>
+</head>
+<body>
+    <div class="navbar">
+        <div><img src="../BM-SEVA LOGO 3.PNG" alt="Company Logo" style="height: 40px;"></div>
+        <div>
+          <a href="guiude.html">Home</a>
+          <a href="service.html">Services</a>
+          <a href="login.html">login</a>
+          <a href="request-status.html">Request Status</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+    
+      <div class="contact-container">
+        <div class="contact-form">
+          <h2>Contact Us</h2>
+          <form id="contact-form">
+            <input type="text" name="from_name" placeholder="Your Name" required>
+            <input type="email" name="from_email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    
+      <div class="contact-info">
+        <h3>Our Contact Information</h3>
+        <p>If you have any questions, feel free to reach out to us:</p>
+        <div class="address"><strong>Address:</strong> 1234 Main Street, City, Country</div>
+        <div class="phone"><strong>Phone:</strong>+91 8610749248</div>
+        <div class="email"><strong>Email:</strong>jaybethpragathees@gmail.com</div>
+      </div>
+    
+      <script>
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+          e.preventDefault();
+    
+          emailjs.sendForm("service_gsev889", "YOUR_TEMPLATE_ID", this)
+            .then(function(response) {
+              alert("Message sent successfully!");
+              console.log("SUCCESS!", response.status, response.text);
+            }, function(error) {
+              alert("Failed to send message. Please try again.");
+              console.log("FAILED...", error);
+            });
+    
+          this.reset();
+        });
+      </script>
+    
+    <!-- <div class="navbar">
+        <div><img src="../BM-SEVA LOGO 3.PNG" alt="Company Logo" style="height: 40px;"></div>
+        <div>
+            <a href="login.html">Home</a>
+            <a href="service.html">Services</a>
+            <a href="request-status.html">Request Status</a>
+            <a href="contact-us.html">Contact Us</a>
+        </div>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form action="submit-contact-form.php" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="contact-info">
+        <h3>Our Contact Information</h3>
+        <p>If you have any questions, feel free to reach out to us:</p>
+
+        <div class="address">
+            <strong>Address:</strong> 1234 Main Street, City, Country
+        </div>
+        <div class="phone">
+            <strong>Phone:</strong> +1 (123) 456-7890
+        </div>
+        <div class="email">
+            <strong>Email:</strong> info@yourcompany.com
+        </div>
+
+
+        
+    </div> -->
+
+</body>
+</html>

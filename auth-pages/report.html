@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Biomedical Waste Pickup</title>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    form div {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input,
+    textarea,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    (function(){
+    // Initialize EmailJS
+    emailjs.init("qEBlzdD5bJZvQdqUY"); 
+    })();// Replace with your User ID
+
+    function BiomedicalWastagePickup() {
+      const [formData, setFormData] = useState({
+        name: "",
+        contactNumber: "",
+        address: "",
+        descriptionOfWaste: "",
+        preferredPickupDate: "",
+      });
+      const [location, setLocation] = useState(null);
+      const [imageFile, setImageFile] = useState(null);
+
+      // Update form data
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      };
+
+      // Handle image upload
+      const handleImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+          setImageFile(e.target.files[0]);
+        }
+      };
+
+      // Get current location
+      const handleGetLocation = () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              setLocation({ latitude, longitude });
+            },
+            (error) => {
+              alert("Error fetching location: " + error.message);
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      };
+
+      // Submit form
+      const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!formData.name || !formData.contactNumber || !formData.address) {
+          alert("Please fill in all required fields.");
+          return;
+        }
+
+        const templateParams = {
+          ...formData,
+          latitude: location?.latitude || "Not provided",
+          longitude: location?.longitude || "Not provided",
+        };
+
+        emailjs
+          .send("service_vo0ul65", "template_uvwh2tr", templateParams)
+          .then((response) => {
+            console.log("Email sent successfully!", response);
+            alert("Request submitted successfully!");
+          })
+          .catch((error) => {
+            console.error("Error sending email:", error);
+            alert("Failed to submit the request.");
+          });
+      };
+
+      return (
+        <div className="container">
+          <h1>Biomedical Waste Pickup Request</h1>
+          <form onSubmit={handleSubmit}>
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <label>Contact Number:</label>
+            <input
+              type="text"
+              name="contactNumber"
+              placeholder="Enter your contact number"
+              value={formData.contactNumber}
+              onChange={handleChange}
+              required
+            />
+            <label>Address:</label>
+            <input
+              type="text"
+              name="address"
+              placeholder="Enter pickup address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+            <label>Description of Waste:</label>
+            <textarea
+              name="descriptionOfWaste"
+              placeholder="Describe the waste"
+              value={formData.descriptionOfWaste}
+              onChange={handleChange}
+              required
+            ></textarea>
+            <label>Preferred Pickup Date:</label>
+            <input
+              type="date"
+              name="preferredPickupDate"
+              value={formData.preferredPickupDate}
+              onChange={handleChange}
+              required
+            />
+            <label>Upload Image:</label>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+            {imageFile && (
+              <div>
+                <p>Selected file: {imageFile.name}</p>
+                <img src={URL.createObjectURL(imageFile)} alt="Preview" />
+              </div>
+            )}
+            <label>Location:</label>
+            <button type="button" onClick={handleGetLocation}>
+              Get Current Location
+            </button>
+            {location && (
+              <div>
+                <p>
+                  <strong>Latitude:</strong> {location.latitude}
+                </p>
+                <p>
+                  <strong>Longitude:</strong> {location.longitude}
+                </p>
+              </div>
+            )}
+            <button type="submit">Submit Request</button>
+          </form>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<BiomedicalWastagePickup />, document.getElementById("root"));
+  </script>
+    
+  
+  
+  <!-- <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useRef } = React;
+
+    function BiomedicalWastagePickup() {
+      const [location, setLocation] = useState(null);
+
+      const watchId = useRef(null);
+
+      const [imageFile, setImageFile] = useState(null);
+
+      const handleImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+          setImageFile(event.target.files[0]);
+        }
+      };
+
+      const handleGetLocation = () => {
+        if (navigator.geolocation) {
+          if (watchId.current !== null) {
+            navigator.geolocation.clearWatch(watchId.current);
+            watchId.current = null;
+          }
+          watchId.current = navigator.geolocation.watchPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              console.log("Updated position:", latitude, longitude);
+              // Add a small random offset to latitude and longitude to simulate change
+              const offsetLat = latitude + (Math.random() - 0.5) * 0.0001;
+              const offsetLng = longitude + (Math.random() - 0.5) * 0.0001;
+              setLocation({ latitude: offsetLat, longitude: offsetLng });
+            },
+            (error) => {
+              alert("Error fetching location: " + error.message);
+            },
+            { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      };
+
+      return (
+        <div className="container">
+          <h1>Biomedical Waste Pickup Request</h1>
+          <form>
+            <div>
+              <label>Name:</label>
+              <input type="text" placeholder="Enter your name" required />
+            </div>
+            <div>
+              <label>Contact Number:</label>
+              <input type="text" placeholder="Enter your contact number" required />
+            </div>
+            <div>
+              <label>Address:</label>
+              <input type="text" placeholder="Enter pickup address" required />
+            </div>
+            <div>
+              <label>Description of Waste:</label>
+              <textarea placeholder="Describe the waste" required></textarea>
+            </div>
+            <div>
+              <label>Preferred Pickup Date:</label>
+              <input type="date" required />
+            </div>
+            <div>
+              <label>Upload Image:</label>
+              <input type="file" accept="image/*" onChange={handleImageChange} />
+              {imageFile && (
+                <div>
+                  <p>Selected file: {imageFile.name}</p>
+                  <img
+                    src={URL.createObjectURL(imageFile)}
+                    alt="Preview"
+                    style={{ maxWidth: "100%", maxHeight: "300px", marginTop: "10px", borderRadius: "5px" }}
+                  />
+                </div>
+              )}
+            </div>
+            <div>
+              <label>Location:</label>
+              <button
+                type="button"
+                onClick={handleGetLocation}
+                style={{ marginBottom: "15px" }}
+              >
+                Get Current Location
+              </button>
+              {location && (
+                <div>
+                  <p>
+                    <strong>Latitude:</strong> {location.latitude}
+                  </p>
+                  <p>
+                    <strong>Longitude:</strong> {location.longitude}
+                  </p>
+                </div>
+              )}
+            </div>
+            <button type="submit">Submit Request</button>
+          </form>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<BiomedicalWastagePickup />, document.getElementById("root"));
+  </script> -->
+</body>
+</html>

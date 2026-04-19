@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BM-SEVA Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: url('WhatsApp Image 2025-04-26 at 14.12.40_8db513c7.png') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: rgba(76, 175, 80, 0.9);
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    .navbar img {
+      height: 40px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      margin: 0 15px;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 5px; /* Reduced padding */
+      height: calc(100vh - 80px); /* Adjusted height for smaller size */
+    }
+
+    .login-wrapper {
+      display: flex;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      max-width: 600px; /* Reduced max width */
+      width: 100%;
+      flex-direction: row;
+      padding: 20px; /* Added padding for smaller container */
+    }
+
+    .login-image {
+      flex: 1;
+      background: url('A_login_screen_interface_superimposed_on_an_enviro.png') center center no-repeat;
+      background-size: cover;
+      display: none; /* Hide by default for smaller screens */
+    }
+
+    .login-box {
+      flex: 1;
+      padding: 20px 15px; /* Reduced padding for the login form */
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #4CAF50;
+      font-size: 1.8rem;
+    }
+
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .login-box input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #45a049;
+    }
+
+    .login-box a {
+      display: block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #4CAF50;
+    }
+
+    .login-box a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <img src="../BM-SEVA LOGO 3.PNG" alt="BM-SEVA Logo">
+    <div>
+      <a href="guiude.html">Home</a>
+      <a href="service.html">Services</a>
+      <a href="login.html">login</a>
+      <a href="request-status.html">Request Status</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <div class="login-wrapper">
+      <div class="login-image"></div>
+      <div class="login-box">
+        <h2>Customer Login</h2>
+        <form>
+          <input type="text" placeholder="Enter Username" required />
+          <input type="password" placeholder="Enter Password" required />
+          <div style="text-align: left; margin-bottom: 20px;">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember Password</label>
+          </div>
+          <button type="submit">Sign in</button>
+        </form>
+        <a href="#">Forgot Password?</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
